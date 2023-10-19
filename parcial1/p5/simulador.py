@@ -63,13 +63,6 @@ def main():
                     print("No es posible ejecutar el programa '{}'".format(nombre))
             else:
                 print("Error: el programa '{}' no existe".format(nombre))
-        elif "MOSTRAR" in accion.split(" "):
-            print(programas)
-            print()
-            print(interpretes)
-            print()
-            print(traductores)
-            print()
         elif accion == "SALIR":
             break
 
@@ -93,7 +86,6 @@ def ejecutable(interpretes, traductores, lenguaje):
 
     # Mientras haya lenguajes desde los que se pueda ejecutar el programa, continuamos iterando.
     while lenguajes_ejecutables:
-        print(lenguajes_ejecutables)
         # Conjunto de lenguajes desde los que se podrá ejecutar el programa en la siguiente iteración.
         nuevos_lenguajes_ejecutables = set()
 

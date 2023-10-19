@@ -1,0 +1,7 @@
+Para correr el archivo de rotacion de strings, se debe llamar al archivo con argumentos <string> <nro de rotaciones>
+
+EJ: ./p1_b1.go hola 2
+
+Para correr el archivo de operacion de matrices, se debe llamar al archivo con argumento <.txt con matrices>
+
+EJ: ./p1_b2.go matriz.txt

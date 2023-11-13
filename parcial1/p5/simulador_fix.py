@@ -40,7 +40,6 @@ def main():
                     print("Error: el intérprete para '{}' ya existe".format(lenguaje))
                 else:
                     interpretes.append(Interprete(lenguaje_base, lenguaje))
-                    print(interpretes)
                     print("Se definió un intérprete para '{}', escrito en '{}'".format(lenguaje, lenguaje_base))
             elif arg1 == "TRADUCTOR":
                 lenguaje_base = arg2
@@ -87,7 +86,7 @@ def ejecutable(interpretes, traductores, lenguaje):
     # Mientras haya lenguajes desde los que se pueda ejecutar el programa, continuamos iterando.
     while lenguajes_ejecutables:
         # Conjunto de lenguajes desde los que se podrá ejecutar el programa en la siguiente iteración.
-        nuevos_lenguajes_ejecutables = set()
+        nuevos_lenguajes_ejecutables = lenguajes_ejecutables
 
         # Iteramos sobre los intérpretes.
         for interpretador in interpretes:
@@ -108,7 +107,7 @@ def ejecutable(interpretes, traductores, lenguaje):
             break
 
         # Actualizamos la lista de lenguajes desde los que se puede ejecutar el programa.
-        lenguajes_ejecutables = nuevos_lenguajes_ejecutables
+        lenguajes_ejecutables = nuevos_lenguajes_ejecutables | lenguajes_ejecutables
 
     # Devolvemos True si el programa está escrito en un lenguaje desde el que se puede ejecutar, False en caso contrario.
     return lenguaje in lenguajes_ejecutables

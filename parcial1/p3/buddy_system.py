@@ -4,6 +4,7 @@ import math
 import sys
 
 class Buddy_System(object):
+    
     def __init__(self,n: int):
         if n <= 0:
             raise Exception("La cantidad de bloques debe ser un entero positivo.")

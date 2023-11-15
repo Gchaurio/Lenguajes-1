@@ -12,15 +12,14 @@ class Client(object):
         while True:
             action = input("\nIntroduzca un comando:\n").strip().split(' ')
             if "EVAL" in action:
-                if len(action) != 3:
-                    print('Se han recibido inputs de mas.')
-                if action[1] == ("PRE" or "POST") :
-                    parser = Parser(action[1],action[2])
+                if action[1] == ("PRE") or action[1] ==("POST") :
+                    parser = Parser(action[1],action[2:len(action)])
                     print(parser.parse())
                 else:
                     print("No se ha reconocido el orden")
             elif "MOSTRAR" in action:
-                pass
+                parser = Parser(action[1],action[2:len(action)])
+                print(parser.mostrar())
             elif "SALIR" in action:
                 exit()
             else:

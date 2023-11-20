@@ -3,7 +3,7 @@ import time
 import pandas as pd
 
 def main(): 
-    ns = [n for n in range(0, 250, 10)]    
+    ns = [n for n in range(0, 210, 5)]    
     df = pd.DataFrame(columns=['Numero', 'Tiempo Recursion', 'Tiempo Recursion de Cola', 'Tiempo Iterativo'])
 
     for n in ns:

@@ -1,4 +1,4 @@
-# Lenguajes-1
+# Lenguajes-1/ Parical 2
 ## Para correr los scripts de c, basta con correr los makes.
 
 En cada Carpeta, se encuentra el algoritmo deseado junto con pruebas.

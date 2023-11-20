@@ -3,7 +3,7 @@ import time
 import pandas as pd
 
 def main(): 
-    ns = [n for n in range(0, 220, 10)]    
+    ns = [n for n in range(0, 250, 10)]    
     df = pd.DataFrame(columns=['Numero', 'Tiempo Recursion', 'Tiempo Recursion de Cola', 'Tiempo Iterativo'])
 
     for n in ns:
@@ -21,6 +21,11 @@ def main():
         start = time.time()
         n_iter = f_iter(n)
         time_iter = round(time.time() - start, 12)
+
+
+        print(f"n_recur = {n_recur}")
+        print(f"n_cola = {n_cola}")
+        print(f"n_iter = {n_iter}")
         
     
         curr_df = pd.DataFrame(data={

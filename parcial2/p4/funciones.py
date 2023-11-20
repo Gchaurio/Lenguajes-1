@@ -22,19 +22,20 @@ def f_aux(n: int, x: list, i: int) -> int:
     
     # Si se ha alcanzado el valor n, se retorna.
     elif n == i:
-
-        return sum([x[35 - i*6] for i in range(1, 7)])
+        return x[35]
     
     # Se calcula el valor de f(i)
     else:
         
-        # Calulamos la suma de los valores calulados, lo colocamos al final de la lista. Movemos los valores hacia atras.
-        to_add = sum([x[35 - i*6] for i in range(1, 7)])
+        # Calulamos la suma de los valores que nos interesan, lo colocamos al final de la lista. Movemos los valores hacia atras.
+        to_add = sum([x[i*6] for i in range(0, 6)])
         x[:-1] = x[1:]
-        x.append(to_add)
-        
+        x[-1] = to_add
+
+     
         # Calulamos el siguiente valor pasando los valores ya calculados. Aqui es donde se implmenta la cola, con los valores almacenados.
         return f_aux(n, x, i+1)
+
     
 def f_iter(n:int):
 
@@ -49,10 +50,10 @@ def f_iter(n:int):
     # Mientras no lleguemos al objetivo, iteramos sobre los valores existentes y calculamos los nuevos en un mismo ciclo iterativo
     while n != i:    
 
-        to_add = sum([x[35 - i*6] for i in range(1, 7)])
+        to_add = sum([x[i*6] for i in range(0, 6)])
         x[:-1] = x[1:]
-        x.append(to_add)
+        x[-1] = to_add
         i += 1
 
-    # una vez llegado al valor, devolvemos la suma de todos los anteriores.
-    return sum([x[35 - i*6] for i in range(1, 7)])
+    # una vez llegado al valor, devolvemos la suma.
+    return x[35]

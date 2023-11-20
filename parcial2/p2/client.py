@@ -13,8 +13,11 @@ class Client(object):
             action = input("\nIntroduzca un comando:\n").strip().split(' ')
             if "EVAL" in action:
                 if action[1] == ("PRE") or action[1] ==("POST") :
-                    parser = Parser(action[1],action[2:len(action)])
-                    print(parser.parse())
+                    if len(action) <  3:
+                        print("Debe introducir una expresion valida.")
+                    else:
+                        parser = Parser(action[1],action[2:len(action)])
+                        print(parser.parse())
                 else:
                     print("No se ha reconocido el orden")
             elif "MOSTRAR" in action:

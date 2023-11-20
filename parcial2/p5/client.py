@@ -1,34 +1,32 @@
+from manejador import Manejador
+
 # Cliente que maneja el programa.
 class Client(object):
 
     def __init__(self):
 
-        self.buddy_system = Buddy_System(blocks)
-        print('Inputs posibles:\nATOMICO <nombre> <representación> <alineación>\nLIBERAR <nombre>\nMOSTRAR\nSALIR\n')
+        self.manejador = Manejador()
+        print('Inputs posibles:\nATOMICO <nombre> <representación> <alineación>\nSTRUCT <nombre> [<tipo>]\nUNION <nombre> [<tipo>]\nDESCRIBIR <nombre>\nSALIR\n')
 
     def client(self):
+
         while True:
             action = input("\nIntroduzca un comando:\n").strip().split(' ')
-            if "RESERVAR" in action:
-                if len(action) != 3:
-                    print('Se han recibido inputs de mas.')
-                try:
-                    amount = int(action[1])
-                    print(self.buddy_system.reservar(amount,action[2]))
-                except:
-                    print("El valor introducido para cantidad de memoria a reservar, no es un numero.")
-            elif "LIBERAR" in action:
-                if len(action) != 2:
-                    print('Se han recibido inputs de mas.')
-                print(self.buddy_system.liberar(action[1]))
-            elif "MOSTRAR" in action:
-                if len(action) != 1:
-                    print('Se han recibido inputs de mas.')
-                print(self.buddy_system.mostrar())
-            elif "SALIR" in action:
+
+            # Verificamos el comando
+
+            if action[0] == "ATOMICO":
+                self.manejador.handle_atomico(action)
+            elif action[0] == "STRUCT":
+                self.manejador.handle_struct(action)
+            elif action[0] == "UNION":
+                self.manejador.handle_union(action)
+            elif action[0] == "DESCRIBIR":
+                self.manejador.describir(action[1])
+            elif action[0] == "SALIR":
                 exit()
             else:
-                print("No se ha reconocido el comando")
+                print("Error: Comando no reconocido")
 
 if __name__ == '__main__':
 

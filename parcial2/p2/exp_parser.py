@@ -19,7 +19,7 @@ class Parser(object):
     def parse(self):
 
         if self.orden == "PRE":
-
+            
             ope = []
             nums = []
             splitted = self.expr

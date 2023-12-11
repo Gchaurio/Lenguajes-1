@@ -21,21 +21,19 @@ class VM(object):
     def define_class(self, clase: str, superclase:str, metodos: list[str]):
 
         if clase in self.tabla_de_simbolos:
-            print(clase_ya_definida(clase))
-            return
+            return f"La clase \"{clase}\" ya se encuentra definida."
         if superclase and not superclase in self.tabla_de_simbolos:
-            print(superclase_no_definida(superclase))
-            return
+            return (f"La clase \"{superclase}\" no se encuentra definida. No puede ser usada como superclase si no se ha definido.")
         if len(metodos) != len(set(metodos)):
-            print(elementos_duplicados_en_lista_de_metodos(metodos))
-            return
+            return (f"Hay elementos duplicados en la lista de metodos:\n{metodos}\nNo pueden haber metodos duplicados.")
         if not superclase:
             self.tabla_de_simbolos[clase] = Tipo(clase, None, metodos)
-            print(clase_creada(clase))
+            return f"Se ha creado la clase \"{clase}\"." 
         else:
             self.tabla_de_simbolos[clase] = Tipo(
-                clase, self.tabla_de_simbolos[superclase], metodos)                
-            print(clase_creada(clase, superclase))
+                clase, self.tabla_de_simbolos[superclase], metodos)   
+            return f"Se ha creado la clase \"{clase}\" que hereda de \"{superclase}\"."             
+                    
 
     def describir(self, clase:str):
 
@@ -56,31 +54,12 @@ class VM(object):
                 historial_de_metodos.append(metodo)
             lista_de_metodos_con_tipo[0:0] = lista_de_metodos_de_clase
             clase = clase.super_clase
-            
-        print(mostrar_metodos_y_clases(lista_de_metodos_con_tipo), end="")
 
-def clase_ya_definida(clase:str):
-    return f"La clase \"{clase}\" ya se encuentra definida."
-
-def superclase_no_definida(superclase:str):
-    return (f"La clase \"{superclase}\" no se encuentra definida."
-        " No puede ser usada como superclase si no se ha definido.")
-
-def elementos_duplicados_en_lista_de_metodos(metodos: list[str]):
-    return (f"Hay elementos duplicados en la lista de metodos:\n{metodos}"
-        "\nNo pueden haber metodos duplicados.")
-
-def clase_creada(clase:str , superclase:str=None):
-    if superclase:
-        return f"Se ha creado la clase \"{clase}\" que hereda de \"{superclase}\"."
-    else:
-        return f"Se ha creado la clase \"{clase}\"."
-
-def mostrar_metodos_y_clases(lista_de_metodos_y_tipos: list[tuple[str, str]]):
-    out = ''
-    for metodo, clase in lista_de_metodos_y_tipos:
-            out += f'{metodo} -> {clase} :: {metodo}\n'
-    return out
+        out = ''
+        for metodo, clase in lista_de_metodos_con_tipo:
+                out += f'{metodo} -> {clase} :: {metodo}\n'
+        return out
+    
 
 
         

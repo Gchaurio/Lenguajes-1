@@ -4,40 +4,42 @@ from VM import VM
 def main():
     vm = VM()
     while True:
-        user_input = input("Comandos: CLASS <tipo> [<nombre>] o CLASS <tipo> : <superclase> [<nombre>] \nDESCRIBIR <tipo>\nSALIR\n")
+        user_input = input("\nComandos:\nCLASS <tipo> [<nombre>] o CLASS <tipo> : <superclase> [<nombre>] \nDESCRIBIR <tipo>\nSALIR\nIntroduzca su comando: ")
         if "CLASS" in user_input:
-
-            parametros = re.sub(r'^CLASS', '', user_input).strip().split(":")
+            parametros = user_input.strip().split(":")
             if len(parametros) == 2:
-                clase = parametros[0].strip()         
-                parametros = parametros[1].split()            
+                clase = parametros[0].strip().split(" ")       
+                clase = clase[1] 
+                parametros = parametros[1].strip().split(" ")       
                 if len(parametros) >= 2:
                     superClase = parametros[0]
                     metodos = parametros[1:]
+                elif len(parametros) == 1:
+                    superClase = parametros[0]
+                    metodos = None
                 else:
-                    print(f'Error en accion: "{user_input}"\nSe requieren los argumentos'
-                    ' <tipo> [<nombre>] o <tipo> : <superclase> [<nombre>]')
+                    print(f'Error en accion. \nEjemplo de uso: <tipo> [<nombre>] o <tipo> : <superclase> [<nombre>]')
                     return
-            elif len(parametros) == 1 and parametros[0].strip() != '':
-                parametros = parametros[0].split()
-                if len(parametros) >= 2:
-                    clase = parametros[0]
-                    superClase = None
-                    metodos = parametros[1:]
-                else:
-                    print(f'Error en accion: "{user_input}"\nSe requieren los argumentos'
-                    ' <tipo> [<nombre>] o <tipo> : <superclase> [<nombre>]')
-                    return
+            elif len(parametros) == 1 :
+                parametros = parametros[0].split(" ")
+                if parametros[1].strip() != '':
+                    if len(parametros) >= 3:
+                        clase = parametros[1]
+                        superClase = None
+                        metodos = parametros[2:]
+                    else:
+                        print(f'Error en accion. \nEjemplo de uso: <tipo> [<nombre>] o <tipo> : <superclase> [<nombre>]')
+                        return
             else:
-                print(f'Error en accion: "{user_input}"\nSe requieren los argumentos'
-                    ' <tipo> [<nombre>] o <tipo> : <superclase> [<nombre>]')
+                print(f'Error en accion. \nEjemplo de uso: <tipo> [<nombre>] o <tipo> : <superclase> [<nombre>]')
                 return
             
-            vm.define_class(clase, superClase, metodos)        
+            #print(clase, superClase, metodos)
+            print(vm.define_class(clase, superClase, metodos))      
 
         elif "DESCRIBIR" in user_input:
-            clase = re.sub(r'^DESCRIBIR', '', user_input).strip()
-            vm.describir(clase)
+            clase = user_input.strip().split(" ")
+            print(vm.describir(clase[1]))
 
         elif user_input == "SALIR":
             exit()

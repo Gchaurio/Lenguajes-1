@@ -16,16 +16,12 @@ def is_structure(expression):
     return "(" in expression and ")" in expression and is_atom(expression.split("(")[0])
 
 def apply_rule(rule, query):
-    """Aplica una regla a una consulta, si es posible."""
-    # Esta es una implementación muy simplificada.
-    # No maneja la recursión ni las reglas más complejas.
+
     rule_args, antecedents = rule
     unifications = unify(query, ("structure", None, rule_args))
 
     if unifications is None:
         return None
-
-    # Aquí deberías expandir la lógica para manejar antecedentes de reglas.
     return unifications
 
 def parse_expression(expression):
@@ -35,7 +31,7 @@ def parse_expression(expression):
         return ("variable", expression)
     elif is_structure(expression):
         functor, args = expression.split("(", 1)
-        args = args[:-1]  # Remove closing parenthesis
+        args = args[:-1]
         args = [arg.strip() for arg in args.split(",")]
         parsed_args = [parse_expression(arg) for arg in args]
         return ("structure", functor, parsed_args)
@@ -118,11 +114,11 @@ def test():
 def main():
     while True:
         user_input = input("Ingrese una acción (DEF, ASK, SALIR): ")
-        if user_input.startswith("DEF"):
+        if "DEF" in user_input:
             _, expression, *antecedents = user_input.split()
             print(expression)
             define_fact_or_rule(expression, antecedents)
-        elif user_input.startswith("ASK"):
+        elif "ASK" in user_input:
             _, expression = user_input.split(maxsplit=1)
             handle_query(expression)
         elif user_input == "SALIR":

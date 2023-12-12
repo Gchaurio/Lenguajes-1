@@ -1,56 +1,56 @@
-from VM import VM
+from Manejador import Manejador
 
-vm =  VM()
+manejador =  Manejador()
 
-def test_define_class1():
+def test_def_clase1():
     
-    a = vm.define_class("A",None,["a,b,c"])
+    a = manejador.def_clase("A",None,["a,b,c"])
     b = "\nClase A creada." 
 
-    assert vm.tabla_de_simbolos["A"].nombre == "A"
-    assert vm.tabla_de_simbolos["A"].super_clase == None
-    assert vm.tabla_de_simbolos["A"].metodos == ["a,b,c"]
+    assert manejador.tabla["A"].nombre == "A"
+    assert manejador.tabla["A"].super == None
+    assert manejador.tabla["A"].metodos == ["a,b,c"]
     assert a == b
     
 
 def test_define_copy():
     
-    a = vm.define_class("A",None,["a,b,c"])
+    a = manejador.def_clase("A",None,["a,b,c"])
     b = "\nA ya se encuentra definida."
 
     assert a == b
 
-def test_define_class2():
+def test_def_clase2():
     
-    a = vm.define_class("B","A",None)
+    a = manejador.def_clase("B","A",None)
     b = (f"\nClase B que hereda de A creada.")   
 
     assert a == b
 
 def test_define_dupmet():
     
-    a = vm.define_class("C","B",["c","c"])
+    a = manejador.def_clase("C","B",["c","c"])
     b = "\nNo pueden haber metodos duplicados en la lista de metodos." 
 
     assert a == b
 
-def test_define_class3():
+def test_def_clase3():
     
-    a = vm.define_class("C","B",["d"])
+    a = manejador.def_clase("C","B",["d"])
     b = "\nClase C que hereda de B creada."
 
     assert a == b
 
 def test_describir1():
 
-    a = vm.describir("Z")
-    b = "\nLa clase Z no se encuentra definida"
+    a = manejador.describir("Z")
+    b = "\nClase Z no se encuentra definida"
 
     assert a == b
 
 def test_describir2():
 
-    a = vm.describir("A")
+    a = manejador.describir("A")
     b = "\na,b,c -> A :: a,b,c\n"
 
     assert a == b

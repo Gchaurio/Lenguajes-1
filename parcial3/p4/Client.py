@@ -1,4 +1,3 @@
-import re
 from VM import VM
 
 def main():
@@ -18,8 +17,7 @@ def main():
                     superClase = parametros[0]
                     metodos = None
                 else:
-                    print(f'Error en accion. \nEjemplo de uso: <tipo> [<nombre>] o <tipo> : <superclase> [<nombre>]')
-                    return
+                    print(f'Error con los argumentos. \nEjemplo de uso: <tipo> [<nombre>] o <tipo> : <superclase> [<nombre>]')
             elif len(parametros) == 1 :
                 parametros = parametros[0].split(" ")
                 if parametros[1].strip() != '':
@@ -28,12 +26,10 @@ def main():
                         superClase = None
                         metodos = parametros[2:]
                     else:
-                        print(f'Error en accion. \nEjemplo de uso: <tipo> [<nombre>] o <tipo> : <superclase> [<nombre>]')
-                        return
-            else:
-                print(f'Error en accion. \nEjemplo de uso: <tipo> [<nombre>] o <tipo> : <superclase> [<nombre>]')
-                return
-            
+                        print(f'Error con los argumentos. \nEjemplo de uso: <tipo> [<nombre>] o <tipo> : <superclase> [<nombre>]')
+                else:
+                    print('Error con los argumentos. \nEjemplo de uso: <tipo> [<nombre>] o <tipo> : <superclase> [<nombre>]')
+                        
             #print(clase, superClase, metodos)
             print(vm.define_class(clase, superClase, metodos))      
 

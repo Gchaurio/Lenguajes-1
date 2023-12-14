@@ -1,6 +1,7 @@
 from Secuencia import *
 from Grafo import *
 
+# Clase Busqueda
 class Busqueda:
     def __init__(self, g: Grafo):
         self.visitados = set()
@@ -9,7 +10,7 @@ class Busqueda:
     def buscar(self, D, H):
         raise NotImplementedError()
 
-
+# Clase DFS subtipo Busqueda
 class DFS(Busqueda):
     def buscar(self, D, H):
         self.visitados.clear()
@@ -30,7 +31,7 @@ class DFS(Busqueda):
 
         return -1
 
-
+# Clase BFS subtipo Busqueda
 class BFS(Busqueda):
     def buscar(self, D, H):
         self.visitados.clear()

@@ -1,5 +1,6 @@
 from Manejador import Manejador
 
+# Cliente, Main que recibe inputs hasta que se llame la funcion SALIR.
 def main():
     manejador = Manejador()
     while True:

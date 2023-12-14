@@ -1,3 +1,4 @@
+# Implementacion de la clase Secuencia
 class Secuencia:
     def __init__(self):
         self.elementos = []
@@ -11,6 +12,7 @@ class Secuencia:
     def esta_vacia(self):
         raise NotImplementedError()
 
+# Clase Pila subtipo Secuencia
 class Pila(Secuencia):
     def __init__(self):
         super().__init__()
@@ -24,6 +26,7 @@ class Pila(Secuencia):
     def esta_vacia(self):
         return len(self.elementos) == 0
     
+# Clase Cola subtipo Secuencia
 class Cola(Secuencia):
     def __init__(self):
         super().__init__()

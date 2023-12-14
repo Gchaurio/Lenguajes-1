@@ -1,17 +1,22 @@
 import re
 
+# Arreglo de reglas o hechos
 facts = {}
 rules = {}
 
+# Funcion para comprobar si una expresion es un atomo
 def is_atom(expression):
     return re.match("^[a-z][a-zA-Z0-9]*$", expression) is not None
 
+# Funcion para comprobar si una expresion es una variable
 def is_variable(expression):
     return re.match("^[A-Z][a-zA-Z0-9]*$", expression) is not None
 
+# Funcion para comprobar si una expresion es una estrucura
 def is_structure(expression):
     return "(" in expression and ")" in expression and is_atom(expression.split("(")[0])
 
+# Funcion para aplicar las reglas de la query
 def apply_rule(rule, query):
 
     rule_args, antecedents = rule
@@ -21,6 +26,7 @@ def apply_rule(rule, query):
         return None
     return unifications
 
+# Funcion para parsear expresiones (to fix espacios en blanco)
 def parse_expression(expression):
     if is_atom(expression):
         return ("atom", expression)
@@ -35,6 +41,7 @@ def parse_expression(expression):
     else:
         raise ValueError("Error aqui")
 
+# Funcion que define un hecho o una regla
 def define_fact_or_rule(expression, antecedents):
     expr_type, functor, args = parse_expression(expression)
     if expr_type != "structure":
@@ -50,6 +57,7 @@ def define_fact_or_rule(expression, antecedents):
         rules[functor].append((("structure", functor, args), parsed_antecedents))
         print(f"Se definió la regla '{expression} :- {' '.join(antecedents)}'")
 
+# Unifica Expresiones con sus hechos
 def unify(expression, fact):
     _, _, expr_args = expression
     _, _, fact_args = fact
@@ -70,7 +78,7 @@ def unify(expression, fact):
     return unifications
 
         
-
+# Funcion para manejar las querys
 def handle_query(expression):
     expr_type, functor, args = parse_expression(expression)
     if expr_type != "structure":

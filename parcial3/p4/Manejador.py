@@ -1,3 +1,4 @@
+# Clase tipo
 class Tipo(object):
     
     def __init__(self, nombre, super, metodos):
@@ -5,6 +6,7 @@ class Tipo(object):
         self.super = super
         self.metodos = metodos
 
+# Manejador de tablas virtuales.
 class Manejador(object):
     
     def __init__(self):

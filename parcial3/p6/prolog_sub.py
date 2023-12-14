@@ -1,11 +1,8 @@
-# Importaciones necesarias
 import re
 
-# Estructuras de datos para almacenar hechos y reglas
 facts = {}
 rules = {}
 
-# Funciones de utilidad para análisis y validación de expresiones
 def is_atom(expression):
     return re.match("^[a-z][a-zA-Z0-9]*$", expression) is not None
 
@@ -36,12 +33,12 @@ def parse_expression(expression):
         parsed_args = [parse_expression(arg) for arg in args]
         return ("structure", functor, parsed_args)
     else:
-        raise ValueError("Invalid expression")
+        raise ValueError("Error aqui")
 
 def define_fact_or_rule(expression, antecedents):
     expr_type, functor, args = parse_expression(expression)
     if expr_type != "structure":
-        raise ValueError("Only structures can be facts or rules")
+        raise ValueError("Error dios ya basta")
 
     if not antecedents:
         facts[functor] = [("structure", functor, args)]
@@ -73,11 +70,11 @@ def unify(expression, fact):
     return unifications
 
         
-# Función para manejar consultas
+
 def handle_query(expression):
     expr_type, functor, args = parse_expression(expression)
     if expr_type != "structure":
-        raise ValueError("Queries must be structures")
+        raise ValueError("LMAOOOOOOOOOOOOOOOO")
 
     query = (expr_type, functor, args)
 
@@ -98,17 +95,6 @@ def handle_query(expression):
 
     print("No es satisfacible.")
 
-def test():
-    define_fact_or_rule('padre(juan, jose)', [])
-    define_fact_or_rule('padre(jose, pablo)', [])
-    define_fact_or_rule('padre(pablo, gaby)', [])
-    define_fact_or_rule('ancestro(X, Y)', ['padre(X, Y)'])
-    define_fact_or_rule('ancestro(X, Y)', ['padre(X, Z)', 'ancestro(Z, Y)'])
-
-    print("\nRealizando consultas:")
-    handle_query('ancestro(gaby, X)')
-    handle_query('padre(juan, jose)')
-    handle_query('ancestro(juan, X)')
 
 # Interfaz de usuario
 def main():
@@ -123,8 +109,6 @@ def main():
             handle_query(expression)
         elif user_input == "SALIR":
             break
-        elif user_input == "test":
-            test()
         else:
             print("Acción no reconocida")
 

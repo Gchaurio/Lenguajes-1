@@ -1,6 +1,6 @@
-# Lenguajes-1/ Parical 3
+# Lenguajes-1/ Parcial 3
 
-## La parte en texto de las preguntas 1, 2, 3 y 5 estan en el archivo p1_a_p2_a_p3_p5.pdf. Referirse a ellas para las de respuestas de desarrollo.
+## La parte de desarollo de las preguntas 1, 2, 3 y 5 estan en el archivo p1_a_p2_a_p3_p5.pdf. Referirse a este para las de respuestas de desarrollo.
 
 ## Para la pregunta 1, se pude probar usando client.py
 
